@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Bhagwat_Geeta_Jet_Pack_Compose" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#B09DD6</item>
+        <item name="postSplashScreenTheme">@style/Theme.Bhagwat_Geeta_Jet_Pack_Compose</item>
+        <item name="windowSplashScreenAnimationDuration">3000</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/round_add_reaction_24</item>
+    </style>
+</resources>
