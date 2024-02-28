@@ -44,7 +44,8 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun BhagwatGeetaDetailScreen(items: BhagwatGeeta, navController: NavHostController, flag: Int) {
-    ConstraintLayout {
+    ConstraintLayout(
+    ) {
         Column(
             modifier = Modifier.verticalScroll(state = ScrollState(1), enabled = true)
         ) {
@@ -149,7 +150,8 @@ fun BhagwatGeetaDetailScreen(items: BhagwatGeeta, navController: NavHostControll
             }
         }
         val scrollCoroutineScope = rememberCoroutineScope()
-        ConstraintLayout {
+        ConstraintLayout(
+        ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly,

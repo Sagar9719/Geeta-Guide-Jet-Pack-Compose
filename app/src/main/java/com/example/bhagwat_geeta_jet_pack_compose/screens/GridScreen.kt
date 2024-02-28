@@ -11,10 +11,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -63,10 +67,12 @@ fun GridScreen(navController: NavHostController) {
             )
         }
         Column(
-            modifier = Modifier.padding(0.dp, 50.dp, 0.dp, 0.dp)
+            modifier = Modifier
+                .padding(0.dp, 50.dp, 0.dp, 0.dp)
+                .background(Color.White)
         ) {
-            LazyVerticalGrid(columns = GridCells.Fixed(2),
-                contentPadding = PaddingValues(16.dp),
+            LazyVerticalGrid(modifier = Modifier.background(Color.LightGray),
+                columns = GridCells.Fixed(2),
                 verticalArrangement = Arrangement.SpaceAround,
                 content = {
                     items(bhagwatGeetas.value) { bhagwatGeetaItem ->
@@ -75,7 +81,8 @@ fun GridScreen(navController: NavHostController) {
                                 .fillMaxWidth()
                                 .height(180.dp)
                                 .background(Color.LightGray)
-                                .padding(2.dp, 2.dp, 2.dp, 2.dp),
+                                .padding(8.dp, 8.dp, 8.dp, 8.dp),
+                            elevation = CardDefaults.cardElevation(6.dp)
                         ) {
                             Column(
                                 horizontalAlignment = Alignment.CenterHorizontally,

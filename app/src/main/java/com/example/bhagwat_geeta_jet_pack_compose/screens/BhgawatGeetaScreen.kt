@@ -62,7 +62,9 @@ fun BhagwatGeetaScreen(navController: NavHostController) {
                         color = Color.Red
                     )
                 }
-                LazyColumn {
+                LazyColumn(
+                    modifier = Modifier.background(Color.LightGray)
+                ) {
                     items(bhagwatGeetas) { bhagwatGeetaItem ->
                         Card(
                             modifier = Modifier
