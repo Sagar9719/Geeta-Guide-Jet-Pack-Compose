@@ -1,10 +1,14 @@
 package com.example.bhagwat_geeta_jet_pack_compose.screens
 
 import android.widget.Toast
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,14 +19,19 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -30,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.bhagwat_geeta_jet_pack_compose.bottomBar.BottomNavItem
 import com.example.bhagwat_geeta_jet_pack_compose.dataModel.BhagwatGeeta
 import com.example.bhagwat_geeta_jet_pack_compose.viewModel.BhagwatGeetaViewModel
 
@@ -38,7 +48,6 @@ fun BhagwatGeetaScreen(navController: NavHostController) {
     val viewModel: BhagwatGeetaViewModel = hiltViewModel()
     val context = LocalContext.current
     val bhagwatGeetas by viewModel.bhagwatGeetas.observeAsState(emptyList())
-
     LaunchedEffect(key1 = Unit) {
         viewModel.fetchBhagwatGeeta()
     }
@@ -63,7 +72,8 @@ fun BhagwatGeetaScreen(navController: NavHostController) {
                     )
                 }
                 LazyColumn(
-                    modifier = Modifier.background(Color.LightGray)
+                    modifier = Modifier
+                        .background(Color.LightGray)
                 ) {
                     items(bhagwatGeetas) { bhagwatGeetaItem ->
                         Card(
@@ -137,6 +147,9 @@ fun BhagwatGeetaScreen(navController: NavHostController) {
         }
     }
 }
+
+
+
 
 
 

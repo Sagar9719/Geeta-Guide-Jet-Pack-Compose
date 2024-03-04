@@ -1,5 +1,6 @@
 package com.example.bhagwat_geeta_jet_pack_compose.screens
 
+import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
@@ -20,11 +21,14 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,52 +51,45 @@ fun BhagwatGeetaDetailScreen(items: BhagwatGeeta, navController: NavHostControll
     ConstraintLayout(
     ) {
         Column(
-            modifier = Modifier.verticalScroll(state = ScrollState(1), enabled = true)
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White)
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Column(
-                    modifier = Modifier.padding(8.dp)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(0.dp, 8.dp, 0.dp, 0.dp),
+                    horizontalArrangement = Arrangement.Absolute.SpaceAround
                 ) {
                     Text(
-                        modifier = Modifier
-                            .background(
-                                color = Color.LightGray,
-                                shape = RectangleShape
-                            )
-                            .padding(4.dp),
+                        modifier = Modifier.padding(4.dp),
                         text = "Chapter - ${items.id}",
                         fontSize = 16.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
-                        color = Color.White,
+                        color = Color.Black,
                     )
                     Spacer(modifier = Modifier.height(20.dp))
                     Text(
-                        text = "Verses_Count - ${items.verses_count}",
+                        text = items.name_transliterated,
                         fontSize = 16.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
                         color = Color.Red
                     )
                 }
-                Column(
-                    modifier = Modifier.padding(8.dp)
+            Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Absolute.SpaceAround
                 ) {
                     Text(
-                        modifier = Modifier
-                            .background(
-                                color = Color.LightGray,
-                                shape = RectangleShape
-                            )
-                            .padding(4.dp),
-                        text = items.name_transliterated,
+                        modifier = Modifier.padding(4.dp),
+                        text = "Verses_Count - ${items.verses_count}",
                         fontSize = 16.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
-                        color = Color.White
+                        color = Color.Black
                     )
                     Spacer(modifier = Modifier.height(20.dp))
                     Text(
@@ -103,35 +100,36 @@ fun BhagwatGeetaDetailScreen(items: BhagwatGeeta, navController: NavHostControll
                         color = Color.Red
                     )
                 }
+            Divider(color = Color.Black, thickness = 1.dp)
             }
         }
-        HorizontalPagerScreen(items)
+            HorizontalPagerScreen(items)
 
-        if (flag == 0) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .padding(0.dp, 500.dp, 0.dp, 0.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Button(onClick = {
-                    navController.navigate("GridScreen"){
-                        navController.popBackStack()
+            if (flag == 0) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(0.dp, 500.dp, 0.dp, 0.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Button(onClick = {
+                        navController.navigate("GridScreen") {
+                            navController.popBackStack()
+                        }
+                    }) {
+                        Text(
+                            text = "Grid View",
+                            modifier = Modifier.padding(8.dp, 8.dp, 8.dp, 8.dp),
+                            fontFamily = FontFamily.SansSerif,
+                            fontSize = 16.sp,
+                        )
                     }
-                }) {
-                    Text(
-                        text = "Grid View",
-                        modifier = Modifier.padding(8.dp, 8.dp, 8.dp, 8.dp),
-                        fontFamily = FontFamily.SansSerif,
-                        fontSize = 16.sp,
-                    )
                 }
             }
         }
-    }
-}
+
 
 
     @Composable
@@ -150,12 +148,11 @@ fun BhagwatGeetaDetailScreen(items: BhagwatGeeta, navController: NavHostControll
             }
         }
         val scrollCoroutineScope = rememberCoroutineScope()
-        ConstraintLayout(
-        ) {
+        ConstraintLayout{
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.padding(vertical = 200.dp)
+                modifier = Modifier.padding(0.dp, 76.dp, 0.dp, 0.dp)
             ) {
                 TabRow(
                     selectedTabIndex = pagerState.currentPage,

@@ -100,8 +100,15 @@ dependencies {
     implementation ("androidx.core:core-splashscreen:1.0.1")
 
 
- //Constraint Layout
+    //Constraint Layout
     implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
+    //Animation
+    implementation ("androidx.compose.animation:animation:1.6.2")
+
+
+    //Material 3
+    implementation("androidx.compose.material3:material3:1.2.0")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.0")
 }
 
