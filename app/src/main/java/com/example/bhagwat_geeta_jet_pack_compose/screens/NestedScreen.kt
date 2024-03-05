@@ -31,17 +31,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.bhagwat_geeta_jet_pack_compose.R
 import com.example.bhagwat_geeta_jet_pack_compose.dataModel.BhagwatGeeta
 import com.example.bhagwat_geeta_jet_pack_compose.dataModel.BhagwatGeetaChild
 import com.example.bhagwat_geeta_jet_pack_compose.dataModel.imageList
+import com.example.bhagwat_geeta_jet_pack_compose.popUpBar.PopUpBar
 import com.example.bhagwat_geeta_jet_pack_compose.viewModel.BhagwatGeetaViewModel
 import kotlinx.coroutines.delay
 
@@ -74,6 +79,7 @@ fun NestedScreen(navController: NavHostController) {
             }
         }
         else {
+            PopUpBar()
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -173,3 +179,4 @@ fun RowItemUI(bhagwatGeetaChild: BhagwatGeetaChild) {
         )
     }
 }
+
