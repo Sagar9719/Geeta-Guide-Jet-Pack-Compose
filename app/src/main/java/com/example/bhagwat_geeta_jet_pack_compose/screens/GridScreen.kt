@@ -59,7 +59,7 @@ fun GridScreen(navController: NavHostController) {
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Bhagwat Geeta Grid View",
+                text = "Bhagwat Geeta",
                 fontFamily = FontFamily.Serif,
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,

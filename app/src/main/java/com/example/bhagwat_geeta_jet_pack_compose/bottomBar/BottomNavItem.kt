@@ -5,15 +5,21 @@ sealed class BottomNavItem(
     val route: String,
     val icon: Int
 ) {
-    object List :
+    object Home :
             BottomNavItem(
-                "List View",
-                R.drawable.list1
+                "Home View",
+                R.drawable.home
             )
 
     object Grid :
             BottomNavItem(
                 "Grid View",
                 R.drawable.grid
+            )
+
+    object List:
+            BottomNavItem(
+                "List View",
+                R.drawable.list1
             )
 }

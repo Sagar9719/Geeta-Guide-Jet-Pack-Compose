@@ -60,112 +60,98 @@ fun BhagwatGeetaScreen(navController: NavHostController) {
     val viewModel: BhagwatGeetaViewModel = hiltViewModel()
     val context = LocalContext.current
     val bhagwatGeetas by viewModel.bhagwatGeetas.observeAsState(emptyList())
-    var rotationState by remember { mutableStateOf(0f) }
+
     LaunchedEffect(key1 = Unit) {
         viewModel.fetchBhagwatGeeta()
-        while (true) {
-            delay(16) // Adjust delay for smoother animation
-            rotationState += 4f // Adjust rotation speed
-        }
     }
 
     ConstraintLayout {
-        Column {
-            if (bhagwatGeetas.isEmpty()) {
-                 Column(
-                     horizontalAlignment = Alignment.CenterHorizontally,
-                     verticalArrangement = Arrangement.Center,
-                     modifier = Modifier.fillMaxSize()
-                 ) {
-                     Icon(
-                         Icons.Rounded.Refresh, contentDescription = "Localized description",
-                         modifier = Modifier.graphicsLayer(rotationZ = rotationState)
-                     )
-                 }
-            }
-            else {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(0.dp, 8.dp, 0.dp, 0.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = "Bhagwat Geeta List View",
-                        fontFamily = FontFamily.Serif,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp,
-                        color = Color.Red
-                    )
-                }
-                LazyColumn(
-                    modifier = Modifier
-                        .background(Color.LightGray)
-                ) {
-                    items(bhagwatGeetas) { bhagwatGeetaItem ->
-                        Card(
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(0.dp, 8.dp, 0.dp, 0.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "Bhagwat Geeta",
+                fontFamily = FontFamily.Serif,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = Color.Red
+            )
+        }
+        Column(
+            modifier = Modifier
+                .padding(0.dp, 50.dp, 0.dp, 0.dp)
+                .background(Color.White)
+        ) {
+            LazyColumn(
+                modifier = Modifier
+                    .background(Color.LightGray)
+            ) {
+                items(bhagwatGeetas) { bhagwatGeetaItem ->
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp, 12.dp, 12.dp, 12.dp)
+                            .background(Color.Gray),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+                        shape = RoundedCornerShape(4.dp),
+                    ) {
+                        Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(12.dp, 12.dp, 12.dp, 12.dp)
-                                .background(Color.Gray),
-                            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-                            shape = RoundedCornerShape(4.dp),
+                                .padding(2.dp, 6.dp, 2.dp, 2.dp),
+                            horizontalArrangement = Arrangement.Absolute.Center
                         ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(2.dp, 6.dp, 2.dp, 2.dp),
-                                horizontalArrangement = Arrangement.Absolute.Center
+                            Text(
+                                text = "Chapter - ",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 16.sp
+                            )
+                            Text(
+                                text = bhagwatGeetaItem.chapter_number.toString()
+                                    ?: "Name Transliterated Not Availiable",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 16.sp
+                            )
+                            Text(text = " : ")
+                            Text(
+                                text = bhagwatGeetaItem.name_transliterated
+                                    ?: "Name Transliterated Not Availiable",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 16.sp
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(2.dp, 6.dp, 2.dp, 6.dp),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Button(
+                                onClick = {
+                                    val bhagwatgeeta = BhagwatGeeta(
+                                        id = bhagwatGeetaItem.id,
+                                        name = bhagwatGeetaItem.name,
+                                        chapter_summary = bhagwatGeetaItem.chapter_summary,
+                                        chapter_summary_hindi = bhagwatGeetaItem.chapter_summary_hindi,
+                                        name_meaning = bhagwatGeetaItem.name_meaning,
+                                        name_transliterated = bhagwatGeetaItem.name_transliterated,
+                                        verses_count = bhagwatGeetaItem.verses_count,
+                                        slug = bhagwatGeetaItem.slug,
+                                        name_translated = bhagwatGeetaItem.name_translated,
+                                        chapter_number = bhagwatGeetaItem.chapter_number
+                                    )
+                                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                                        key = "bhagwatgeeta",
+                                        value = bhagwatgeeta
+                                    )
+                                    navController.navigate("BhagwatGeetaDetailScreen/${1}")
+                                },
                             ) {
-                                Text(
-                                    text = "Chapter - ",
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 16.sp
-                                )
-                                Text(
-                                    text = bhagwatGeetaItem.chapter_number.toString()
-                                        ?: "Name Transliterated Not Availiable",
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 16.sp
-                                )
-                                Text(text = " : ")
-                                Text(
-                                    text = bhagwatGeetaItem.name_transliterated
-                                        ?: "Name Transliterated Not Availiable",
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 16.sp
-                                )
-                            }
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(2.dp, 6.dp, 2.dp, 6.dp),
-                                horizontalArrangement = Arrangement.Center
-                            ) {
-                                Button(
-                                    onClick = {
-                                        val bhagwatgeeta = BhagwatGeeta(
-                                            id = bhagwatGeetaItem.id,
-                                            name = bhagwatGeetaItem.name,
-                                            chapter_summary = bhagwatGeetaItem.chapter_summary,
-                                            chapter_summary_hindi = bhagwatGeetaItem.chapter_summary_hindi,
-                                            name_meaning = bhagwatGeetaItem.name_meaning,
-                                            name_transliterated = bhagwatGeetaItem.name_transliterated,
-                                            verses_count = bhagwatGeetaItem.verses_count,
-                                            slug = bhagwatGeetaItem.slug,
-                                            name_translated = bhagwatGeetaItem.name_translated,
-                                            chapter_number = bhagwatGeetaItem.chapter_number
-                                        )
-                                        navController.currentBackStackEntry?.savedStateHandle?.set(
-                                            key = "bhagwatgeeta",
-                                            value = bhagwatgeeta
-                                        )
-                                        navController.navigate("BhagwatGeetaDetailScreen/${0}")
-                                    },
-                                ) {
-                                    Text(text = "Summary")
-                                }
+                                Text(text = "Summary")
                             }
                         }
                     }
