@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -31,18 +30,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Popup
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.bhagwat_geeta_jet_pack_compose.R
 import com.example.bhagwat_geeta_jet_pack_compose.dataModel.BhagwatGeeta
 import com.example.bhagwat_geeta_jet_pack_compose.dataModel.BhagwatGeetaChild
 import com.example.bhagwat_geeta_jet_pack_compose.dataModel.imageList
@@ -169,14 +164,14 @@ fun  ColumnItemUI(bhagwatGeeta: BhagwatGeeta, navController: NavHostController) 
 
 @Composable
 fun RowItemUI(bhagwatGeetaChild: BhagwatGeetaChild) {
-    Box(
-        modifier = Modifier.padding(2.dp, 2.dp, 2.dp, 2.dp)
-               .height(190.dp),
-    ){
-        Image(
-            painter = painterResource(id = bhagwatGeetaChild.image),
-            contentDescription = "BhagwatGeetaImage"
-        )
-    }
+        Box(
+            modifier = Modifier.padding(2.dp, 2.dp, 2.dp, 2.dp)
+        ) {
+            Image(
+                painter = painterResource(id = bhagwatGeetaChild.image),
+                contentDescription = "BhagwatGeetaImage",
+                modifier = Modifier.fillMaxSize()
+            )
+        }
 }
 
